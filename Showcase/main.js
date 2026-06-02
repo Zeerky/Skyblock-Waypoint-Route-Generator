@@ -49,7 +49,8 @@ function projectCard(p) {
 
 async function load() {
   try {
-    const res = await fetch("/Skyblock-Waypoint-Route-Generator/projects.json", { cache: "no-store" });
+    // Using a direct relative name ensures it targets the deployment root cleanly
+    const res = await fetch("projects.json", { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const projects = await res.json();
 
@@ -62,12 +63,13 @@ async function load() {
     count.textContent = "Error";
     grid.appendChild(
       el("div", { class: "card", href: "#" }, [
-        el("div", { class: "card-title" }, [el("h4", {}, ["Failed to load projects"])]);
-      ]),
+        el("div", { class: "card-title" }, [
+          el("h4", {}, ["Failed to load projects"])
+        ])
+      ])
     );
     console.error(e);
   }
 }
 
 load();
-

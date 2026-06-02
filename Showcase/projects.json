@@ -5,6 +5,6 @@
     "description": "Find high-coal mining routes across ore clusters with constraints, route history, map hover tooltips, and exports.",
     "tags": ["Minecraft", "Optimization", "Web"],
     "status": "live",
-    "href": "/Skyblock-Waypoint-Route-Generator/routefinder/"
+    "href": "./routefinder/"
   }
 ]
