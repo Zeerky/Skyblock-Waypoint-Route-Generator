@@ -36,9 +36,12 @@ export default function App() {
   useEffect(() => {
     let cancelled = false;
     setLoadState("loading");
-    fetch("/ore_clusters.json")
+    const url = `${import.meta.env.BASE_URL}ore_clusters.json`;
+    fetch(url)
       .then((r) => {
-        if (!r.ok) throw new Error(`Failed to load clusters (${r.status})`);
+        if (!r.ok) {
+          throw new Error(`Failed to load clusters (${r.status}) from ${url}`);
+        }
         return r.json() as Promise<OreCluster[]>;
       })
       .then((data) => {
