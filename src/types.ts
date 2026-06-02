@@ -38,10 +38,10 @@ export interface RouteResult {
 
 export const DEFAULT_PARAMS: RouteParams = {
   minBlockCount: 35,
-  maxBlockCount: null,
+  maxBlockCount: 20,
   maxDistance: 20,
-  minWaypoints: 10,
-  maxWaypoints: 200,
+  minWaypoints: 50,
+  maxWaypoints: 75,
   startCandidates: 25,
   distanceWeight: 0.15,
   startClusterId: null,
