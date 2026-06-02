@@ -49,7 +49,7 @@ function projectCard(p) {
 
 async function load() {
   try {
-    const res = await fetch("./projects.json", { cache: "no-store" });
+    const res = await fetch("/Skyblock-Waypoint-Route-Generator/projects.json", { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const projects = await res.json();
 
