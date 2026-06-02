@@ -4,7 +4,7 @@ This repo is structured as a **showcase homepage** plus individual project apps.
 
 ## Structure
 
-- `Showcase/` — static homepage (edit `Showcase/projects.json` to add cards)
+- `Showcase/` — static homepage (`site.json` for branding, `projects.json` for cards)
 - `RouteFinder/` — Coal Route Finder app (Vite + React)
 
 GitHub Pages deploy:

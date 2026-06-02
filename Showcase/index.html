@@ -3,67 +3,114 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Zeerk Projects — live demos of tools and experiments, including Coal Route Finder for Minecraft mining routes."
+    />
+    <meta name="theme-color" content="#0a0e12" />
     <title>Zeerk Projects</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#projects">Skip to projects</a>
+
     <header class="topbar">
       <div class="topbar-inner">
-        <div>
-          <h1 class="brand">Zeerk Projects</h1>
-          <p class="tagline">A home for my experiments, tools, and builds.</p>
-        </div>
-        <div class="topbar-actions">
-          <a class="btn" href="https://github.com/" target="_blank" rel="noreferrer">
+        <a class="brand-link" href="./">
+          <span class="brand-mark" aria-hidden="true">Z</span>
+          <div>
+            <h1 class="brand" id="siteName">Zeerk Projects</h1>
+            <p class="tagline" id="siteTagline">Loading…</p>
+          </div>
+        </a>
+        <nav class="topbar-actions" aria-label="External links">
+          <a class="btn" id="githubLink" href="#" target="_blank" rel="noreferrer">
             GitHub
           </a>
-        </div>
+        </nav>
       </div>
     </header>
 
     <main class="page">
-      <section class="hero">
-        <div class="hero-card">
-          <div class="hero-badge">Showcase</div>
-          <h2>Featured projects</h2>
-          <p>
-            Click a project to open the live demo. This page is data-driven—add more
-            projects later by editing <code>Showcase/projects.json</code>.
-          </p>
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">Portfolio showcase</p>
+            <h2 id="hero-heading">Tools you can try in the browser</h2>
+            <p class="hero-lead" id="heroLead">
+              Each project is a self-contained web app with a live demo—no installs required.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" id="heroCta" href="#projects">Browse projects</a>
+              <a class="btn" id="heroGithub" href="#" target="_blank" rel="noreferrer">
+                View source
+              </a>
+            </div>
+          </div>
+          <aside class="hero-spotlight" id="heroSpotlight" hidden>
+            <p class="spotlight-label">Featured</p>
+            <h3 class="spotlight-title" id="spotlightTitle"></h3>
+            <p class="spotlight-desc" id="spotlightDesc"></p>
+            <a class="spotlight-link" id="spotlightLink" href="#">
+              Open demo
+              <span class="spotlight-arrow" aria-hidden="true">→</span>
+            </a>
+          </aside>
         </div>
       </section>
 
-      <section class="projects">
+      <section class="about" aria-labelledby="about-heading">
+        <h2 id="about-heading" class="visually-hidden">About this showcase</h2>
+        <ul class="about-grid">
+          <li class="about-card">
+            <span class="about-icon" aria-hidden="true">◇</span>
+            <h3>Live demos</h3>
+            <p>Every card links to a deployed app you can use immediately.</p>
+          </li>
+          <li class="about-card">
+            <span class="about-icon" aria-hidden="true">⚙</span>
+            <h3>Real problems</h3>
+            <p>Optimization, data viz, and workflow helpers—not throwaway prototypes.</p>
+          </li>
+          <li class="about-card">
+            <span class="about-icon" aria-hidden="true">+</span>
+            <h3>Growing list</h3>
+            <p>More projects land here as they ship. Route Finder is the first.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="projects" id="projects" aria-labelledby="projects-heading">
         <div class="projects-header">
-          <h3>Projects</h3>
-          <div class="projects-meta">
-            <span id="projectCount" class="pill">Loading…</span>
+          <div>
+            <h2 id="projects-heading">All projects</h2>
+            <p class="projects-sub">Click a card to launch the demo.</p>
           </div>
+          <span id="projectCount" class="pill">Loading…</span>
         </div>
-        <div id="projectsGrid" class="grid"></div>
-      </section>
-
-      <section class="footer">
-        <div class="footer-card">
-          <div class="footer-left">
-            <span class="muted">Tip:</span>
-            <span class="muted">
-              Put each app under its own folder (like <code>/routefinder/</code>) so it
-              can be deployed as a subpath on GitHub Pages.
-            </span>
-          </div>
-          <span class="muted">© <span id="year"></span></span>
-        </div>
+        <div id="projectsGrid" class="grid" role="list"></div>
+        <p id="projectsEmpty" class="projects-empty" hidden>
+          No projects yet. Add entries to <code>projects.json</code> to show them here.
+        </p>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p class="footer-note">
+          Built for GitHub Pages — homepage plus apps under subpaths like
+          <code>/routefinder/</code>.
+        </p>
+        <p class="footer-copy">© <span id="year"></span> Zeerk</p>
+      </div>
+    </footer>
 
     <script type="module" src="./main.js"></script>
   </body>
 </html>
-

@@ -2,9 +2,11 @@
   {
     "id": "routefinder",
     "title": "Coal Route Finder",
-    "description": "Find high-coal mining routes across ore clusters with constraints, route history, map hover tooltips, and exports.",
-    "tags": ["Minecraft", "Optimization", "Web"],
+    "description": "Search high-coal mining routes across ore clusters with tunable constraints, route history, an interactive map, and waypoint export.",
+    "tags": ["Minecraft", "Optimization", "React", "Web Worker"],
     "status": "live",
+    "featured": true,
+    "year": 2026,
     "href": "./routefinder/"
   }
 ]
