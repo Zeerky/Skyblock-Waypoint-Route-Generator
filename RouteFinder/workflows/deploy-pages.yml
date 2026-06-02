@@ -1,4 +1,4 @@
-name: Deploy Showcase to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -26,24 +26,15 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: RouteFinder/package-lock.json
 
-      - name: Install RouteFinder dependencies
-        working-directory: RouteFinder
+      - name: Install
         run: npm ci
 
-      - name: Build RouteFinder
-        working-directory: RouteFinder
+      - name: Build
         env:
-          # Showcase root is /<repo>/, RouteFinder lives at /<repo>/routefinder/
-          GITHUB_PAGES_BASE: /${{ github.event.repository.name }}/routefinder/
+          # GitHub Pages serves from /<repo>/
+          GITHUB_PAGES_BASE: /${{ github.event.repository.name }}/
         run: npm run build
-
-      - name: Assemble Pages artifact
-        run: |
-          mkdir -p dist/routefinder
-          cp -r Showcase/* dist/
-          cp -r RouteFinder/dist/* dist/routefinder/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

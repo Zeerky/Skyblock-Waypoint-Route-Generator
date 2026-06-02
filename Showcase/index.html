@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zeerk Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div>
+          <h1 class="brand">Zeerk Projects</h1>
+          <p class="tagline">A home for my experiments, tools, and builds.</p>
+        </div>
+        <div class="topbar-actions">
+          <a class="btn" href="https://github.com/" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="hero">
+        <div class="hero-card">
+          <div class="hero-badge">Showcase</div>
+          <h2>Featured projects</h2>
+          <p>
+            Click a project to open the live demo. This page is data-driven—add more
+            projects later by editing <code>Showcase/projects.json</code>.
+          </p>
+        </div>
+      </section>
+
+      <section class="projects">
+        <div class="projects-header">
+          <h3>Projects</h3>
+          <div class="projects-meta">
+            <span id="projectCount" class="pill">Loading…</span>
+          </div>
+        </div>
+        <div id="projectsGrid" class="grid"></div>
+      </section>
+
+      <section class="footer">
+        <div class="footer-card">
+          <div class="footer-left">
+            <span class="muted">Tip:</span>
+            <span class="muted">
+              Put each app under its own folder (like <code>/routefinder/</code>) so it
+              can be deployed as a subpath on GitHub Pages.
+            </span>
+          </div>
+          <span class="muted">© <span id="year"></span></span>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
+
