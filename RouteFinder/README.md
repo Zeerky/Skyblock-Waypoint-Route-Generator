@@ -16,6 +16,22 @@ New-Item -ItemType HardLink -Path "public\ore_clusters.json" -Target "ore_cluste
 
 Or copy the file into `public/ore_clusters.json`.
 
+In the app you can also **upload your own JSON** from the sidebar (see format below).
+
+### Cluster JSON format
+
+Array of objects with `center` and `block_count` (legacy `id` fields are ignored):
+
+```json
+[
+  { "center": [313, 94, 297], "block_count": 253 },
+  { "center": [317, 124, 294], "block_count": 244 }
+]
+```
+
+- `center` — `[x, y, z]` block coordinates of the cluster center
+- `block_count` — number of coal blocks in that cluster
+
 ## Run
 
 ```bash

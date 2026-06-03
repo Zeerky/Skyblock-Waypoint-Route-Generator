@@ -154,17 +154,17 @@ export function ParameterPanel({ params, onChange, disabled }: Props) {
           disabled={disabled}
         />
         <OptionalNumField
-          label="Start cluster ID"
-          hint="Force route to begin at this cluster"
-          value={params.startClusterId}
-          onChange={(v) => set("startClusterId", v)}
+          label="Start cluster index"
+          hint="0-based index in filtered clusters; leave empty for auto"
+          value={params.startClusterIndex}
+          onChange={(v) => set("startClusterIndex", v)}
           disabled={disabled}
         />
         <OptionalNumField
-          label="End cluster ID"
-          hint="Try to reach this cluster at the end"
-          value={params.endClusterId}
-          onChange={(v) => set("endClusterId", v)}
+          label="End cluster index"
+          hint="0-based index in filtered clusters; leave empty for auto"
+          value={params.endClusterIndex}
+          onChange={(v) => set("endClusterIndex", v)}
           disabled={disabled}
         />
       </div>

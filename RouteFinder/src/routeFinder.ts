@@ -501,14 +501,11 @@ export function findOptimalRoute(
     true,
   );
 
-  const idToIndex = new Map<number, number>();
-  clusters.forEach((c, i) => idToIndex.set(c.id, i));
-
   const startSet = new Set<number>();
   const startIndices: number[] = [];
-  if (params.startClusterId !== null) {
-    const idx = idToIndex.get(params.startClusterId);
-    if (idx !== undefined) {
+  if (params.startClusterIndex !== null) {
+    const idx = params.startClusterIndex;
+    if (idx >= 0 && idx < clusters.length) {
       startIndices.push(idx);
       startSet.add(idx);
     }
@@ -527,8 +524,10 @@ export function findOptimalRoute(
   }
 
   const endIdx =
-    params.endClusterId !== null
-      ? (idToIndex.get(params.endClusterId) ?? null)
+    params.endClusterIndex !== null &&
+    params.endClusterIndex >= 0 &&
+    params.endClusterIndex < clusters.length
+      ? params.endClusterIndex
       : null;
 
   const totalStarts = startIndices.length;
@@ -583,7 +582,7 @@ export function findOptimalRoute(
       throttledLog?.log(
         "debug",
         `New best: ${coal} coal, ${path.length} stops`,
-        `start cluster #${clusters[startIdx].id}`,
+        `start @ ${clusters[startIdx].center.join(", ")}`,
       );
     }
 

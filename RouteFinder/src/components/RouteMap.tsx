@@ -275,7 +275,6 @@ export function RouteMap({ result, highlightIndex = null }: Props) {
                   ? "End"
                   : `Stop ${(hoveredIndex ?? 0) + 1}`}
             </span>
-            <span>Cluster #{hovered.id}</span>
             <span>
               {hovered.center[0]}, {hovered.center[1]}, {hovered.center[2]}
             </span>

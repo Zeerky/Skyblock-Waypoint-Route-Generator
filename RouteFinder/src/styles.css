@@ -418,6 +418,72 @@ body {
   border-color: #5cb0ff;
 }
 
+.btn-file {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-file.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.cluster-panel .cluster-source {
+  margin: 0 0 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cluster-source-name {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  word-break: break-all;
+}
+
+.cluster-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.cluster-error {
+  margin-top: 0;
+}
+
+.cluster-format {
+  margin-top: 0.65rem;
+  font-size: 0.85rem;
+}
+
+.cluster-format summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.cluster-format p {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.cluster-example {
+  margin: 0.5rem 0 0;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  overflow-x: auto;
+  color: rgba(226, 232, 240, 0.9);
+}
+
 .error-text {
   margin: 0.65rem 0 0;
   font-size: 0.82rem;

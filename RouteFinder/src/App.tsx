@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { parseClusterData } from "./clusterData";
+import { ClusterDataPanel } from "./components/ClusterDataPanel";
 import { ParameterPanel } from "./components/ParameterPanel";
 import { RouteExportPanel } from "./components/RouteExportPanel";
 import { RouteMap } from "./components/RouteMap";
@@ -14,6 +16,8 @@ import { DEFAULT_PARAMS } from "./types";
 type LoadState = "idle" | "loading" | "ready" | "error";
 type AppPage = "finder" | "routes";
 
+const DEFAULT_CLUSTER_FILE = "ore_clusters.json";
+
 export default function App() {
   const [page, setPage] = useState<AppPage>("finder");
   const [selectedRouteId, setSelectedRouteId] = useState<string | null>(null);
@@ -22,7 +26,10 @@ export default function App() {
   const [loadState, setLoadState] = useState<LoadState>("idle");
   const [loadError, setLoadError] = useState<string | null>(null);
   const [clusterCount, setClusterCount] = useState(0);
+  const [clusterSource, setClusterSource] = useState(DEFAULT_CLUSTER_FILE);
+  const [customClusters, setCustomClusters] = useState(false);
   const clustersRef = useRef<OreCluster[]>([]);
+  const loadGenRef = useRef(0);
 
   const [params, setParams] = useState(DEFAULT_PARAMS);
   const [searching, setSearching] = useState(false);
@@ -33,32 +40,71 @@ export default function App() {
   const workerRef = useRef<Worker | null>(null);
   const requestIdRef = useRef(0);
 
-  useEffect(() => {
-    let cancelled = false;
+  const applyClusters = useCallback(
+    (clusters: OreCluster[], sourceLabel: string, isCustom: boolean) => {
+      clustersRef.current = clusters;
+      setClusterCount(clusters.length);
+      setClusterSource(sourceLabel);
+      setCustomClusters(isCustom);
+      setLoadState("ready");
+      setLoadError(null);
+      setResult(null);
+      setSearchError(null);
+    },
+    [],
+  );
+
+  const loadDefaultClusters = useCallback(async () => {
+    const gen = ++loadGenRef.current;
     setLoadState("loading");
-    const url = `${import.meta.env.BASE_URL}ore_clusters.json`;
-    fetch(url)
-      .then((r) => {
-        if (!r.ok) {
-          throw new Error(`Failed to load clusters (${r.status}) from ${url}`);
+    setLoadError(null);
+    const url = `${import.meta.env.BASE_URL}${DEFAULT_CLUSTER_FILE}`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`Failed to load clusters (${res.status}) from ${url}`);
+      }
+      const raw: unknown = await res.json();
+      if (gen !== loadGenRef.current) return;
+      applyClusters(parseClusterData(raw), DEFAULT_CLUSTER_FILE, false);
+    } catch (e) {
+      if (gen !== loadGenRef.current) return;
+      setLoadState("error");
+      setLoadError(e instanceof Error ? e.message : String(e));
+      setClusterCount(0);
+      clustersRef.current = [];
+    }
+  }, [applyClusters]);
+
+  useEffect(() => {
+    void loadDefaultClusters();
+  }, [loadDefaultClusters]);
+
+  const handleClusterUpload = useCallback(
+    async (file: File) => {
+      const gen = ++loadGenRef.current;
+      setLoadState("loading");
+      setLoadError(null);
+      try {
+        const text = await file.text();
+        let raw: unknown;
+        try {
+          raw = JSON.parse(text);
+        } catch {
+          throw new Error("File is not valid JSON.");
         }
-        return r.json() as Promise<OreCluster[]>;
-      })
-      .then((data) => {
-        if (cancelled) return;
-        clustersRef.current = data;
-        setClusterCount(data.length);
-        setLoadState("ready");
-      })
-      .catch((e) => {
-        if (cancelled) return;
-        setLoadError(e instanceof Error ? e.message : String(e));
+        if (gen !== loadGenRef.current) return;
+        applyClusters(parseClusterData(raw), file.name, true);
+      } catch (e) {
+        if (gen !== loadGenRef.current) return;
         setLoadState("error");
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+        setLoadError(e instanceof Error ? e.message : String(e));
+        setClusterCount(0);
+        clustersRef.current = [];
+      }
+    },
+    [applyClusters],
+  );
 
   useEffect(() => {
     return () => {
@@ -256,6 +302,14 @@ export default function App() {
       ) : (
         <main className="layout">
           <aside className="sidebar">
+            <ClusterDataPanel
+              sourceLabel={clusterSource}
+              isCustom={customClusters}
+              disabled={searching || loadState === "loading"}
+              loadError={loadState === "error" ? loadError : null}
+              onUpload={(file) => void handleClusterUpload(file)}
+              onResetDefault={() => void loadDefaultClusters()}
+            />
             <ParameterPanel
               params={params}
               onChange={setParams}

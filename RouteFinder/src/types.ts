@@ -1,5 +1,4 @@
 export interface OreCluster {
-  id: number;
   center: [number, number, number];
   block_count: number;
 }
@@ -14,8 +13,9 @@ export interface RouteParams {
   startCandidates: number;
   /** Greedy neighbor pick: weight for block count vs distance slack */
   distanceWeight: number;
-  startClusterId: number | null;
-  endClusterId: number | null;
+  /** 0-based index into filtered clusters; null = auto */
+  startClusterIndex: number | null;
+  endClusterIndex: number | null;
   /** Optional bounding box filter (inclusive); null = no limit */
   bounds: {
     minX: number | null;
@@ -44,8 +44,8 @@ export const DEFAULT_PARAMS: RouteParams = {
   maxWaypoints: 100,
   startCandidates: 25,
   distanceWeight: 0.15,
-  startClusterId: null,
-  endClusterId: null,
+  startClusterIndex: null,
+  endClusterIndex: null,
   bounds: {
     minX: null,
     maxX: null,
