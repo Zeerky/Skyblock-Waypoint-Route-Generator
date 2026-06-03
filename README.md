@@ -6,10 +6,12 @@ This repo is structured as a **showcase homepage** plus individual project apps.
 
 - `Showcase/` — static homepage (`site.json` for branding, `projects.json` for cards)
 - `RouteFinder/` — Coal Route Finder app (Vite + React)
+- `Bazaar/` — Hypixel Bazaar Viewer app (Vite + React)
 
 GitHub Pages deploy:
 - Homepage at `/<repo>/`
 - RouteFinder at `/<repo>/routefinder/`
+- Bazaar at `/<repo>/bazaar/`
 
 ## Adding a new project later
 

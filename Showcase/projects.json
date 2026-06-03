@@ -1,5 +1,15 @@
 [
   {
+    "id": "bazaar",
+    "title": "Hypixel Bazaar Viewer",
+    "description": "Filter and sort SkyBlock bazaar products. Upload snapshots or refresh live with your Hypixel API key.",
+    "tags": ["Minecraft", "Hypixel", "React", "Data"],
+    "status": "live",
+    "featured": false,
+    "year": 2026,
+    "href": "./bazaar/"
+  },
+  {
     "id": "routefinder",
     "title": "Coal Route Finder",
     "description": "Search high-coal mining routes across ore clusters with tunable constraints, route history, an interactive map, and waypoint export.",

@@ -26,7 +26,9 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: RouteFinder/package-lock.json
+          cache-dependency-path: |
+            RouteFinder/package-lock.json
+            Bazaar/package-lock.json
 
       - name: Install RouteFinder dependencies
         working-directory: RouteFinder
@@ -39,11 +41,22 @@ jobs:
           GITHUB_PAGES_BASE: /${{ github.event.repository.name }}/routefinder/
         run: npm run build
 
+      - name: Install Bazaar dependencies
+        working-directory: Bazaar
+        run: npm ci
+
+      - name: Build Bazaar
+        working-directory: Bazaar
+        env:
+          GITHUB_PAGES_BASE: /${{ github.event.repository.name }}/bazaar/
+        run: npm run build
+
       - name: Assemble Pages artifact
         run: |
-          mkdir -p dist/routefinder
+          mkdir -p dist/routefinder dist/bazaar
           cp -r Showcase/* dist/
           cp -r RouteFinder/dist/* dist/routefinder/
+          cp -r Bazaar/dist/* dist/bazaar/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

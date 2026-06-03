@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/bazaardata.ts","./src/exportdownload.ts","./src/filterdefaults.ts","./src/format.ts","./src/main.tsx","./src/types.ts","./src/vite-env.d.ts","./src/components/columnpicker.tsx","./src/components/datasourcepanel.tsx","./src/components/datatable.tsx","./src/components/filterpanel.tsx"],"version":"5.8.3"}
